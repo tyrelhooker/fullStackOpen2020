@@ -4,17 +4,20 @@ const Header = ({ courseName }) => <h1>{courseName}</h1>;
 
 const Content = ({ part1, exercises1, part2, exercises2, part3, exercises3 }) => ( 
   <>
-    <p>
-      {part1} {exercises1}
-    </p>
-    <p>
-      {part2} {exercises2}
-    </p>
-    <p>
-      {part3} {exercises3}
-    </p>
+    <Part partNum={part1} exerciseNum={exercises1} />
+    <Part partNum={part2} exerciseNum={exercises2} />
+    <Part partNum={part3} exerciseNum={exercises3} />
   </>  
 )
+
+const Part = ({ partNum, exerciseNum }) => (
+  <>
+    <p>
+      {partNum}: {exerciseNum}
+    </p>
+  </>
+)
+
 
 const Total = ({ exercises1, exercises2, exercises3 }) => <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
 
@@ -31,7 +34,7 @@ const App = () => {
     <div>
       <Header courseName={course} />
       <Content part1={part1} exercises1={exercises1} part2={part2} exercises2={exercises2} part3={part3} exercises3={exercises3} />
-      <Total exercises1={exercises2} exercises2={exercises2} exercises3={exercises3} />
+      <Total exercises1={exercises1} exercises2={exercises2} exercises3={exercises3} />
     </div>
   )
 }
