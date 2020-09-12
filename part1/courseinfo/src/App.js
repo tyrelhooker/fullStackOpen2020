@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Header = ({courseName}) => <h1>{courseName}</h1>;
-// TODO: const Content
-const Content = ({part1, exercises1, part2, exercises2, part3, exercises3}) => ( 
+const Header = ({ courseName }) => <h1>{courseName}</h1>;
+
+const Content = ({ part1, exercises1, part2, exercises2, part3, exercises3 }) => ( 
   <>
     <p>
       {part1} {exercises1}
@@ -16,7 +16,7 @@ const Content = ({part1, exercises1, part2, exercises2, part3, exercises3}) => (
   </>  
 )
 
-// TODO: const Total
+const Total = ({ exercises1, exercises2, exercises3 }) => <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
 
 const App = () => {
   const course = 'Half Stack application development';
@@ -31,7 +31,7 @@ const App = () => {
     <div>
       <Header courseName={course} />
       <Content part1={part1} exercises1={exercises1} part2={part2} exercises2={exercises2} part3={part3} exercises3={exercises3} />
-      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
+      <Total exercises1={exercises2} exercises2={exercises2} exercises3={exercises3} />
     </div>
   )
 }
