@@ -4,6 +4,7 @@ const Hello = ({ personInfo: { age, name } }) => {
   console.log(age)
 
   const bornYear = () => {
+    console.log('testing this')
     const yearNow = new Date().getFullYear();
     return yearNow - age;
   }
