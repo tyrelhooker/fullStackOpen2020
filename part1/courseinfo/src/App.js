@@ -29,11 +29,8 @@ const Part = ({parts}) => (
 const Total = ({ exercises }) => {
   console.log(exercises);
 
-  let totalExercises = 0;
-  exercises.forEach(exercise => totalExercises += exercise)
-
   return (
-    <p>Number of exercises: {totalExercises} </p>
+    <p>Number of exercises: {exercises.reduce((a, b) => a + b)}</p>
   )
 }
 
