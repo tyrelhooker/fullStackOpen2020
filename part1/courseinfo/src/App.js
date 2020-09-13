@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = ({course}) => {
+const Header = ({ course }) => {
   console.log(course);
 
   return (
@@ -8,23 +8,20 @@ const Header = ({course}) => {
   )
 }
 
-
-
-const Content = ({ course }) => {
-  console.log(course);
+const Content = ({ course: { parts } }) => {
+  // console.log(course);
   return ( 
     <>
-      <Part parts={course.parts} />
+      <Part parts={parts} />
     </>  
   )
 }
 
-const Part = ({parts}) => (
+const Part = ({ parts }) => (
   <>
     {parts.map(part => <p key={part.name}>{part.name}: {part.exercises}</p>)}
   </>
 )
-
 
 const Total = ({ exercises }) => {
   console.log(exercises);
