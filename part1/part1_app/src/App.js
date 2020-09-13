@@ -19,13 +19,11 @@ const App = () => {
   //   )  
   // }
   const handleCounter = {
-    handleIncrease: () => {
-      setCounter(counter + 1);
-    },
+    handleIncrease: () => setCounter(counter + 1),
   
-    handleDecrease: () => {
-      setCounter(counter - 1);
-    }
+    handleDecrease: () => setCounter(counter - 1),
+
+    handleReset: () => setCounter(0)
   }
 
  
