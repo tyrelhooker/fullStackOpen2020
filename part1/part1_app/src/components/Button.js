@@ -5,9 +5,9 @@ const Button = ({ onClick: { handleIncrease, handleDecrease, handleReset } }) =>
 
   return (
     <>
-      <button onClick={() => handleIncrease()}>plus</button>
-      <button onClick={() => handleDecrease()}>minus</button>
-      <button onClick={() => handleReset()}>reset</button>
+      <button onClick={handleIncrease}>plus</button>
+      <button onClick={handleDecrease}>minus</button>
+      <button onClick={handleReset}>reset</button>
     </>
   )
 }
