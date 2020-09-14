@@ -50,6 +50,7 @@ const App = () => {
       <br />
       <br />
       <History allClicks={allClicks} />
+      <button onClick={() => console.log('button EH')}>Testing EHs</button>
     </>
   )
 }
