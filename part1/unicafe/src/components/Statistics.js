@@ -11,9 +11,16 @@ const Statistics = ({ allFeedback }) => (
         </tr>
       </thead>
       <tbody>
-        {/* TODO: Change application to display statistics only once feedback has been given */}
-        <Feedback allFeedback={allFeedback} />
-        <Total allFeedback={allFeedback} />
+        {
+          !(allFeedback['good'] || allFeedback['neutral'] || allFeedback['bad'])
+          ? <tr>
+              <td>No feeback given</td>
+            </tr> 
+          : <>
+              <Feedback allFeedback={allFeedback} />
+              <Total allFeedback={allFeedback} />
+            </>
+        }
       </tbody>
     </table>
   </>
