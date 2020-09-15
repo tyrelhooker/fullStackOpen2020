@@ -36,9 +36,15 @@ const Total = ({ allFeedback }) => {
   // calcAverage();
   return (
     <>
-      <tr>Total Feedback: {sumFeedback()}</tr>
-      <tr>Average Feedback: {isNaN(calcAverage()) ? 'No Reviews Submitted Yet' : calcAverage()}</tr>
-      <tr>Percent of Positive Reviews: {isNaN(calcPositve()) ? 'No Reviews Submitted Yet' : calcPositve() + '%'}</tr>
+      <tr>
+        <td>Total Feedback: </td><td>{sumFeedback()}</td>
+      </tr>
+      <tr>
+        <td>Average Feedback: </td><td>{isNaN(calcAverage()) ? 'No Reviews Submitted Yet' : calcAverage()}</td>
+      </tr>
+      <tr>
+        <td>Percent of Positive Reviews: </td><td>{isNaN(calcPositve()) ? 'No Reviews Submitted Yet' : calcPositve() + '%'}</td>
+      </tr>
     </>
   )
 }
@@ -54,13 +60,13 @@ const Statistics = ({ allFeedback }) => {
       <table>
         <thead>
           <tr>
-            <th>Statistics</th>
+            <th colSpan="2">Statistics</th>
           </tr>
         </thead>
         <tbody>
           {Object.entries(allFeedback).map(([key, value]) => (
             <tr key={key}>
-              <td>{key}: {value}</td>
+              <td>{key}: </td><td>{value}</td>
             </tr>
           ))}
           <Total allFeedback={allFeedback} />
