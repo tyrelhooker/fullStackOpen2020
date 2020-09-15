@@ -11,6 +11,7 @@ const Statistics = ({ allFeedback }) => (
         </tr>
       </thead>
       <tbody>
+        {/* TODO: Change application to display statistics only once feedback has been given */}
         <Feedback allFeedback={allFeedback} />
         <Total allFeedback={allFeedback} />
       </tbody>

@@ -34,7 +34,7 @@ const App = () => {
   return (
     <div>
       <Buttons handleFeedback={handleFeedback} />
-      <Statistics allFeedback={allFeedback} />
+      {!(good || neutral || bad) ? <p>No feeback given</p> : <Statistics allFeedback={allFeedback} />}
     </div>
   )
 }
