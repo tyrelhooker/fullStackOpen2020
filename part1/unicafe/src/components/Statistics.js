@@ -27,14 +27,18 @@ const Total = ({ allFeedback }) => {
   }
 
   const calcPositve = () => {
+    let total = sumFeedback();
+    let numerator = allFeedback.good;
 
+    return +((numerator / total) * 100).toFixed(2);
   }
 
   // calcAverage();
   return (
     <>
-      <p>Total Feedback: {sumFeedback()}</p>
-      <p>Average Feedback: {isNaN(calcAverage()) ? 0 : calcAverage()}</p>
+      <tr>Total Feedback: {sumFeedback()}</tr>
+      <tr>Average Feedback: {isNaN(calcAverage()) ? 'No Reviews Submitted Yet' : calcAverage()}</tr>
+      <tr>Percent of Positive Reviews: {isNaN(calcPositve()) ? 'No Reviews Submitted Yet' : calcPositve() + '%'}</tr>
     </>
   )
 }
@@ -47,12 +51,21 @@ const Statistics = ({ allFeedback }) => {
 
   return (
     <>
-      {/* Converts object to array of key/val pairs arrays then maps them  */}
-      {Object.entries(allFeedback).map(([key, value]) => (
-        <p key={key}>{key}: {value}</p>
-      ))}
-
-      <Total allFeedback={allFeedback} />
+      <table>
+        <thead>
+          <tr>
+            <th>Statistics</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.entries(allFeedback).map(([key, value]) => (
+            <tr key={key}>
+              <td>{key}: {value}</td>
+            </tr>
+          ))}
+          <Total allFeedback={allFeedback} />
+        </tbody>
+      </table>
     </>
   )
 }
