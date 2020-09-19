@@ -31,6 +31,7 @@ const App = () => {
         ...persons, 
         {
           name: convertToCamelCase(nameInput),
+          //TODO: add checks to normalize phoneNumInput
           number: phoneNumInput
         }
       ];
@@ -59,9 +60,11 @@ const App = () => {
       return persons.filter((person) => person.name.toUpperCase().includes(searchInput));
     }
 
+    const noPersonsFound = () => 'No person found';
+
     findPersons 
       ? addSearchResult(findPersons)
-      : console.log('the person was not found'); 
+      : noPersonsFound(); 
   }
 
 
