@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
-const Filter = () => {
+const Filter = ({ handleSearch }) => {
+  const searchInput = useRef();
+
+  const change = () => {
+    handleSearch(searchInput.current.value);
+  }
+
   return (
     <>
-
+      Search for: 
+      <input
+        ref={searchInput}
+        onChange={change}
+        placeholder='Enter a name to search'
+      />
     </>
   )
 }
