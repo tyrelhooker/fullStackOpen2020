@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
+import Search from './components/Search';
+import Results from './components/Results';
 
-function App() {
+const App = () => {
+  const [countries, setCountries] = useState([]);
+  const [searchResult, setSearchResult] = useState('');
+  const [foundCountry, setFoundCountry] = useState();
+
+  const URL = 'https://restcountries.eu/rest/v2/all';
+
+  useEffect(() => {
+    console.log('effect');
+    axios
+      .get(URL)
+      .then(response => {
+        console.log('promise fulfilled');
+        console.log(response);
+        setCountries(response.data);
+      })
+  }, []);
+
+  const handleSearch = (event) => {
+    console.log(event.target.value);
+    setSearchResult(event.target.value);
+  }
+    
+  // const searchedCountries = () => {
+  let resultCountries = countries.filter(country => country.name.toLowerCase().includes(searchResult.toLowerCase()));
+
+  console.log(resultCountries);
+  // }
+  
+  let passResults = resultCountries.length < 10 
+    ? <Results resultCountries={resultCountries} />
+    : <p>Too many results. Refine your search</p>
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Search search={searchResult} onSearch={handleSearch} />
+      {passResults}
     </div>
-  );
+  )
+
+  // console.log('countries', countries);
+
 }
 
 export default App;
