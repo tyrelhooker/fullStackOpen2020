@@ -7,7 +7,7 @@ import Results from './components/Results';
 const App = () => {
   const [countries, setCountries] = useState([]);
   const [searchResult, setSearchResult] = useState('');
-  const [foundCountry, setFoundCountry] = useState();
+  const [foundCountry, setFoundCountry] = useState([]);
 
   const URL = 'https://restcountries.eu/rest/v2/all';
 
@@ -24,25 +24,39 @@ const App = () => {
 
   const handleSearch = (event) => {
     console.log(event.target.value);
-    setSearchResult(event.target.value);
+    // const result = event.target.value;
+
+    setSearchResult(event.target.value)
+      
+        let resultCountries = countries.filter(country => country.name.toLowerCase().includes(event.target.value.toLowerCase()));
+        
+        setFoundCountry(resultCountries)
+      
+
   }
     
   // const searchedCountries = () => {
-  let resultCountries = countries.filter(country => country.name.toLowerCase().includes(searchResult.toLowerCase()));
+  
 
-  console.log(resultCountries);
+  console.log(foundCountry);
   // }
   
-  let passResults = resultCountries.length < 10 
-    ? <Results resultCountries={resultCountries} />
-    : <p>Too many results. Refine your search</p>
-  
+  const determineDisplay = () => {
+    console.log('searchResult', searchResult);
+    if (searchResult === '') {
+      return <p>Enter a country's name</p>
+    } else if (foundCountry.length < 10 ){ 
+      return <Results resultCountries={foundCountry} /> 
+    } else { 
+      return <p>Too many results. Refine your search</p>
+    }
+  }
 
   return (
-    <div>
+    <>
       <Search search={searchResult} onSearch={handleSearch} />
-      {passResults}
-    </div>
+      {determineDisplay()}
+    </>
   )
 
   // console.log('countries', countries);
