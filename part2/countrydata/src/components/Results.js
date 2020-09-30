@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Country from './Country';
 
-const Results = ({ resultCountries }) => {
+const Results = ({ resultCountries, setCity, weather, handleCity }) => {
   const [clicked, setClicked] = useState(false);
   const [clickedCountry, setClickedCountry] = useState([]);
 
   // console.log(searchedCountries());
   const handleCountryClick = (country) => {
-    console.log('clickCountry', country);
+
     setClicked(true);
     setClickedCountry([country]);
   }
@@ -15,12 +15,22 @@ const Results = ({ resultCountries }) => {
   return (
     <div> 
       {resultCountries.length === 1 
-        ? <Country key={resultCountries.numericCode} countryData={resultCountries} clicked={clicked}setClicked={setClicked} />
+        ? <Country 
+            key={resultCountries.numericCode} countryData={resultCountries} 
+            clicked={clicked} 
+            setClicked={setClicked} 
+            setCity={setCity}
+            weather={weather}
+            handleCity={handleCity}
+          />
         : clicked
-          ? <Country key={clickedCountry.numericCode} countryData={clickedCountry} clicked={clicked}setClicked={setClicked}/> 
+          ? <Country 
+              key={clickedCountry.numericCode} countryData={clickedCountry} clicked={clicked}
+              setClicked={setClicked}
+            /> 
           : resultCountries.map(country => 
             <div key={country.numericCode}>
-              <li key={country.numericCode}>
+              <li>
                 {country.name}
               </li>
               <button onClick={() => handleCountryClick(country)}>
