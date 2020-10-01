@@ -3,7 +3,7 @@ import Weather from './Weather';
 
 const Country = ({ countryData, setClicked, clicked, setCity, weather, handleCity, city }) => {
   
-  console.log('weather results: ', weather)
+  // console.log('weather results: ', weather)
 
   const handleClick = () => 
     setClicked(false);

@@ -5,10 +5,6 @@ import axios from 'axios';
 const Weather = ({ capital, setCity, city }) => {
   console.log('capital', capital)
   const [weather, setWeather] = useState([]);
-  
-  
-
- 
 
   useEffect(() => {
     const api_key = process.env.REACT_APP_API_KEY;
@@ -30,14 +26,12 @@ const Weather = ({ capital, setCity, city }) => {
   
   // console.log(fetchWeather);
 
-  const handleCity= (capital) => {
-    console.log('fetching weather');
+  useEffect(() => {
     setCity(capital)
-    
     console.log('is city set?', city)
-  }
+  }, [capital, city]);
 
-  handleCity(capital);
+  // handleCity(capital);
   
 
   return (

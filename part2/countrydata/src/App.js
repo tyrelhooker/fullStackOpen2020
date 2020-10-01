@@ -8,7 +8,7 @@ const App = () => {
   const [countries, setCountries] = useState([]);
   const [searchResult, setSearchResult] = useState('');
   const [foundCountry, setFoundCountry] = useState([]);
-  const [city, setCity] = useState('new_york');
+  const [city, setCity] = useState('');
 
   
   
