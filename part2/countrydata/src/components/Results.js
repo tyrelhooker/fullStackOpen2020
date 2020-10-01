@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CountryList from './CountryList';
 
 const Results = ({ resultCountries, setCity, weather, handleCity, city }) => 
@@ -7,8 +7,6 @@ const Results = ({ resultCountries, setCity, weather, handleCity, city }) =>
       ? <CountryList
           resultCountries={resultCountries} 
           setCity={setCity} 
-          // weather={weather} 
-          // handleCity={handleCity}
           city={city}
         />
       : <p>Too Many Results. Please narrow your search</p>
