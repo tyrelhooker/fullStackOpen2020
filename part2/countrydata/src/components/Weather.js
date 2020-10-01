@@ -2,25 +2,31 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-const Weather = ({ capital, fetchWeather, weather }) => {
+const Weather = ({ capital, setCity, city }) => {
   console.log('capital', capital)
   const [weather, setWeather] = useState([]);
-  const api_key = process.env.REACT_APP_API_KEY;
-  let API_URL = '';
+  
+  
 
-  const resetURL = (api_key, city) => `http://api.weatherstack.com/current?access_key=${api_key}&query=${city}`;
+ 
 
   useEffect(() => {
-    API_URL = resetURL(api_key, city);
+    const api_key = process.env.REACT_APP_API_KEY;
+    let API_URL = '';
+
+    const resetURL = (api_key, capital) => `http://api.weatherstack.com/current?access_key=${api_key}&query=${capital}`;
+
+    API_URL = resetURL(api_key, capital);
 
     console.log('USE EFFECT TRIGGERED')
+
     axios
     .get(API_URL)
     .then(response => {
       // console.log([response.data]);
       setWeather([response.data.current]);
     })
-  }, [api_key]);
+  }, [capital]);
   
   // console.log(fetchWeather);
 
@@ -30,7 +36,8 @@ const Weather = ({ capital, fetchWeather, weather }) => {
     
     console.log('is city set?', city)
   }
-  const fetchedWeather = ;
+
+  handleCity(capital);
   
 
   return (

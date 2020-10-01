@@ -51,13 +51,15 @@ const App = () => {
   return (
     <>
       <Search search={searchResult} onSearch={handleSearch} />
+      
       {searchResult === ''
         ? <p>Enter a country's name</p>
         : <Results 
             resultCountries={foundCountry}
             setCity={setCity}
-            weather={weather}
-            handleCity={handleCity}
+            // weather={weather}
+            // handleCity={handleCity}
+            city={city}
           />
       }
     </>

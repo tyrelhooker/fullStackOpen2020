@@ -1,18 +1,12 @@
 import React from 'react';
 import Weather from './Weather';
 
-const Country = ({ countryData, setClicked, clicked, setCity, weather, handleCity}) => {
+const Country = ({ countryData, setClicked, clicked, setCity, weather, handleCity, city }) => {
   
   console.log('weather results: ', weather)
 
-  // const handleClick = () => 
-  //   setClicked(false);
-
-
-  // let weather2 = weather.JSON.parse();
-  // console.log('filtered?', weather.filter(item => item["current"]));
-
- 
+  const handleClick = () => 
+    setClicked(false);
 
   return (
     <>
@@ -30,10 +24,23 @@ const Country = ({ countryData, setClicked, clicked, setCity, weather, handleCit
 
           <img src={item.flag} alt={`${item.name}'s flag`} width="100" height="100"/>
 
-          {/* <button onClick={() => handleClick()}>
+          <br></br>
+          <br></br>
+
+          <Weather 
+            capital={item.capital} 
+            // fetchWeather={handleCity} 
+            // weather={weather} 
+            setCity={setCity}
+            city={city} 
+          / >
+          
+          {clicked 
+          ?
+          <button onClick={() => handleClick()}>
             Click To return 
-          </button> */}
-          <Weather capital={item.capital} fetchWeather={handleCity} weather={weather} />
+          </button>
+          : <p></p>}
         </div>
       )}
       

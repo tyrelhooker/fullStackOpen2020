@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import CountryList from './CountryList';
 
-const Results = ({ resultCountries, setCity, weather, handleCity }) => 
+const Results = ({ resultCountries, setCity, weather, handleCity, city }) => 
   <>
     {resultCountries.length < 10
       ? <CountryList
           resultCountries={resultCountries} 
           setCity={setCity} 
-          weather={weather} 
-          handleCity={handleCity}
+          // weather={weather} 
+          // handleCity={handleCity}
+          city={city}
         />
       : <p>Too Many Results. Please narrow your search</p>
     }

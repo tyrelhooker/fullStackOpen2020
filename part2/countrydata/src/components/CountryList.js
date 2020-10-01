@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Country from './Country';
 
-const CountryList = ({ resultCountries, setCity, weather, handleCity }) => {
+const CountryList = ({ resultCountries, setCity, weather, handleCity, city}) => {
   const [clicked, setClicked] = useState(false);
   const [clickedCountry, setClickedCountry] = useState([]);
 
@@ -19,13 +19,17 @@ const CountryList = ({ resultCountries, setCity, weather, handleCity }) => {
           clicked={clicked} 
           setClicked={setClicked} 
           setCity={setCity}
-          weather={weather}
-          handleCity={handleCity}
+          // weather={weather}
+          // handleCity={handleCity}
+          city={city}
         />
       : clicked
         ? <Country 
-            key={clickedCountry.numericCode} countryData={clickedCountry} clicked={clicked}
+            key={clickedCountry.numericCode} countryData={clickedCountry} 
+            clicked={clicked}
             setClicked={setClicked}
+            setCity={setCity}
+            city={city}
           /> 
         : resultCountries.map(country => 
           <div key={country.numericCode}>
