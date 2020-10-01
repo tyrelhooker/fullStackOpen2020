@@ -8,13 +8,13 @@ const App = () => {
   const [countries, setCountries] = useState([]);
   const [searchResult, setSearchResult] = useState('');
   const [foundCountry, setFoundCountry] = useState([]);
-  const [city, setCity] = useState('');
-  const [weather, setWeather] = useState([]);
+  const [city, setCity] = useState('new_york');
+
   
   
 
   const URL = 'https://restcountries.eu/rest/v2/all';
-  const api_key = process.env.REACT_APP_API_KEY;
+ 
 
     
   // const resetAPI_URL = (capitalCity) => API_URL = `http://api.weatherstack.com/current?access_key=${api_key}&query=${capitalCity}`;
@@ -31,26 +31,8 @@ const App = () => {
   }, []);
 
 
-  const handleCity= (capital) => {
-    console.log('fetching weather');
-    setCity(capital)
-    
-    console.log('is city set?', city)
-  }
+
   
-  useEffect(() => {
-    let API_URL = `http://api.weatherstack.com/current?access_key=${api_key}&query=${city}`;
-
-    console.log('USE EFFECT TRIGGERED')
-    axios
-    .get(API_URL)
-    .then(response => {
-      // console.log([response.data]);
-      setWeather([response.data]);
-    })
-  }, [city, api_key]);
-
-
 
 
 
@@ -66,28 +48,18 @@ const App = () => {
   }
 
 
-
-  const determineDisplay = () => {
-
-    if (searchResult === '') {
-      return <p>Enter a country's name</p>
-    } 
-    else if (foundCountry.length < 10 ) { 
-      return <Results 
-        resultCountries={foundCountry} 
-        setCity={setCity} 
-        weather={weather} 
-        handleCity={handleCity}/> 
-    } 
-    else { 
-      return <p>Too many results. Refine your search</p>
-    }
-  }
-
   return (
     <>
       <Search search={searchResult} onSearch={handleSearch} />
-      {determineDisplay()}
+      {searchResult === ''
+        ? <p>Enter a country's name</p>
+        : <Results 
+            resultCountries={foundCountry}
+            setCity={setCity}
+            weather={weather}
+            handleCity={handleCity}
+          />
+      }
     </>
   )
 

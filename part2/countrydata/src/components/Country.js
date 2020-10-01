@@ -1,14 +1,16 @@
 import React from 'react';
-// import Weather from './Weather';
+import Weather from './Weather';
 
 const Country = ({ countryData, setClicked, clicked, setCity, weather, handleCity}) => {
+  
+  console.log('weather results: ', weather)
 
-  const handleClick = () => 
-    setClicked(false);
+  // const handleClick = () => 
+  //   setClicked(false);
 
 
   // let weather2 = weather.JSON.parse();
-  console.log(weather.filter(item => console.log(item.current)));
+  // console.log('filtered?', weather.filter(item => item["current"]));
 
  
 
@@ -28,25 +30,13 @@ const Country = ({ countryData, setClicked, clicked, setCity, weather, handleCit
 
           <img src={item.flag} alt={`${item.name}'s flag`} width="100" height="100"/>
 
-          <button onClick={() => handleClick()}>
+          {/* <button onClick={() => handleClick()}>
             Click To return 
-          </button>
-          {handleCity(item.capital)}
-
-
+          </button> */}
+          <Weather capital={item.capital} fetchWeather={handleCity} weather={weather} />
         </div>
       )}
-      {/* <div>
-        {weather
-          .filter(status => status.sub
-          .filter(another => another.current)
-          .map((item, index) => 
-            <div key={index}>
-              {item.temperature}
-            </div>
-          )
-        }
-      </div> */}
+      
     </>
   )
 }
