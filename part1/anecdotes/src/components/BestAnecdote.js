@@ -21,4 +21,5 @@ const BestAnecdote = ({ points, anecdotes}) => {
 }
 
 
+
 export default BestAnecdote;

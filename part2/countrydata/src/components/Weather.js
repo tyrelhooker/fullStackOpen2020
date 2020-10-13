@@ -6,10 +6,7 @@ import { v4 } from 'uuid';
 const Weather = ({ capital, setCity, city }) => {
   const [weather, setWeather] = useState([]);
 
-  console.log('weather', weather)
-
   useEffect(() => {
-    console.log('setCity running...')
     setCity(capital)
   }, [capital, setCity]);
 
@@ -32,7 +29,6 @@ const Weather = ({ capital, setCity, city }) => {
       <h2>The weather in {capital}:</h2>
       {weather.map(item => 
         <div key={v4()}>
-          {/* <p>Time: {item.observation_time}</p> */}
           <p>Temperature: {item.temperature}</p>
           <img src={item.weather_icons} alt={item.weather_descriptions} width="100" height="100"/>
           <p>Wind: {`${item.wind_speed} mph ${item.wind_dir}`}</p>

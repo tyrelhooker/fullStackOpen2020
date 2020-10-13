@@ -1,7 +1,7 @@
 import React from 'react';
 import CountryList from './CountryList';
 
-const Results = ({ resultCountries, setCity, weather, handleCity, city }) => 
+const Results = ({ resultCountries, setCity, city }) => 
   <>
     {resultCountries.length < 10
       ? <CountryList

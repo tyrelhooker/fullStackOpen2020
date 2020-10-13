@@ -9,15 +9,9 @@ const App = () => {
   const [searchResult, setSearchResult] = useState('');
   const [foundCountry, setFoundCountry] = useState([]);
   const [city, setCity] = useState('');
-
   
-  
-
   const URL = 'https://restcountries.eu/rest/v2/all';
- 
 
-    
-  // const resetAPI_URL = (capitalCity) => API_URL = `http://api.weatherstack.com/current?access_key=${api_key}&query=${capitalCity}`;
 
   useEffect(() => {
     console.log('effect');
@@ -29,11 +23,6 @@ const App = () => {
         setCountries(response.data);
       })
   }, []);
-
-
-
-  
-
 
 
   const handleSearch = (event) => {
@@ -57,8 +46,6 @@ const App = () => {
         : <Results 
             resultCountries={foundCountry}
             setCity={setCity}
-            // weather={weather}
-            // handleCity={handleCity}
             city={city}
           />
       }

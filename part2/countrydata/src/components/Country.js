@@ -1,7 +1,7 @@
 import React from 'react';
 import Weather from './Weather';
 
-const Country = ({ countryData, setClicked, clicked, setCity, weather, handleCity, city }) => {
+const Country = ({ countryData, setClicked, clicked, setCity, city }) => {
   
   console.log('countryData ', countryData)
 
@@ -29,8 +29,6 @@ const Country = ({ countryData, setClicked, clicked, setCity, weather, handleCit
 
           <Weather 
             capital={item.capital} 
-            // fetchWeather={handleCity} 
-            // weather={weather} 
             setCity={setCity}
             city={city} 
           / >
