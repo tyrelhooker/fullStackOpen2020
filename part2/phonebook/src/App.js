@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
-import Persons from './components/Persons';
+import Person from './components/Person';
 import personsService from './services/persons';
 
 const convertToCamelCase = (string) => {
@@ -85,7 +85,7 @@ const App = () => {
       <h3>Name Search</h3>
       <Filter handleSearch={handleSearch} />
       <h3>Results</h3>
-      <Persons searchResult={searchResult}/>
+      <Person searchResult={searchResult}/>
       <h3>Add Person to Phonebook</h3>
       <PersonForm handleAddPerson={handleAddPerson}/>
 
