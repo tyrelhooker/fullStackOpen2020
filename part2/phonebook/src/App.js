@@ -51,7 +51,7 @@ const App = () => {
       : addPerson();
   }
 
-
+  // TODO: fix the flow of this function. Maybe refactor the PersonForm Component?
   const handleUpdate = ( foundPerson, phoneNumInput, nameInput ) => {
     const {id, name} = foundPerson;
     const changePhoneNum = window.confirm(`${name} already exists. Would you like to change their phone number in the phonebook?`)
