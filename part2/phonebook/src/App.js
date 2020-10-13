@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './App.css';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
-import numberService from './services/numbers';
+import personsService from './services/persons';
 
 const convertToCamelCase = (string) => {
   return string.split(' ')
@@ -16,18 +15,15 @@ const convertToCamelCase = (string) => {
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
-
-  const URL = 'http://localhost:3001/persons';
+  
 
   useEffect(() => {
-    console.log('effect');
-    axios
-      .get(URL)
-      .then(response => {
-        console.log('promise fulfilled');
-        console.log(response)
-        setPersons(response.data);
-      })
+    
+    personsService
+      .getAll()
+      .then(initialPersons => setPersons(initialPersons))
+      .catch(error => console.log(`${error}: Failed to retrieve persons.`))
+      
   }, []);
 
 
@@ -41,7 +37,7 @@ const App = () => {
           number: phoneNumInput
         };
 
-      numberService
+      personsService
         .create(newPersons)
         .then(returnedPersons => {
           setPersons(persons.concat(returnedPersons))

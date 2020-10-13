@@ -5,8 +5,8 @@ const Person = ({ searchResult }) => {
     <>
       <table>
         <tbody>
-          {searchResult.map((val, index) =>
-            <tr key={index+1}>
+          {searchResult.map(val =>
+            <tr key={val.id}>
               <td> {val.name} </td>
               <td>{'.'.repeat(10)}</td>
               <td>{val.number}</td>
