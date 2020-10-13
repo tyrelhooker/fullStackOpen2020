@@ -4,6 +4,7 @@ import './App.css';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
+import numberService from './services/numbers';
 
 const convertToCamelCase = (string) => {
   return string.split(' ')
@@ -29,20 +30,22 @@ const App = () => {
       })
   }, []);
 
+
   const handleAddPerson = (nameInput, phoneNumInput) => {
-    let newPersons = [];
 
     const addPerson = () => {
-      newPersons = [
-        ...persons, 
+      const newPersons =  
         {
           name: convertToCamelCase(nameInput),
           //TODO: add checks to normalize phoneNumInput
           number: phoneNumInput
-        }
-      ];
+        };
 
-      setPersons(newPersons);
+      numberService
+        .create(newPersons)
+        .then(returnedPersons => {
+          setPersons(persons.concat(returnedPersons))
+        })
     }
 
     let foundPerson = persons.find(person => person.name.toLowerCase() === nameInput.toLowerCase());
@@ -51,6 +54,7 @@ const App = () => {
       ? alert(`${nameInput} already exists`)
       : addPerson();
   }
+
 
   const handleSearch = (searchInput) => {
     let foundPersons = [];
