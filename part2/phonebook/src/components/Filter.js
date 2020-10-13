@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-const Filter = ({ handleSearch }) => {
+const Filter = ({ handleSearch, searchResult }) => {
   const searchInput = useRef();
 
   const change = () => {

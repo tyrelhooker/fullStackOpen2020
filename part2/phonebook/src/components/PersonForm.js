@@ -6,10 +6,10 @@ const PersonForm = ({ handleAddPerson }) => {
 
   const submit = e => {
     e.preventDefault();
-    handleAddPerson(nameInput.current.value, phoneNumInput.current.value);
-    nameInput.current.value = '';
-    phoneNumInput.current.value = '';
-    nameInput.current.focus();
+    handleAddPerson(nameInput.current.value, phoneNumInput.current.value, phoneNumInput, nameInput);
+    // nameInput.current.value = '';
+    // phoneNumInput.current.value = '';
+    // nameInput.current.focus();
   }
 
   return (

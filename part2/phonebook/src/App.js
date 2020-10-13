@@ -27,7 +27,7 @@ const App = () => {
   }, []);
 
 
-  const handleAddPerson = (nameInput, phoneNumInput) => {
+  const handleAddPerson = (nameInput, phoneNumInput, entirePhoneNumInput, entireNameInput) => {
 
     const addPerson = () => {
       const newPersons =  
@@ -47,30 +47,84 @@ const App = () => {
     let foundPerson = persons.find(person => person.name.toLowerCase() === nameInput.toLowerCase());
 
     foundPerson 
-      ? alert(`${nameInput} already exists`)
+      ? handleUpdate(foundPerson, entirePhoneNumInput, entireNameInput)
       : addPerson();
   }
 
 
+  const handleUpdate = ( foundPerson, phoneNumInput, nameInput ) => {
+    const {id, name} = foundPerson;
+    const changePhoneNum = window.confirm(`${name} already exists. Would you like to change their phone number in the phonebook?`)
+
+    if (changePhoneNum) {
+
+      phoneNumInput.current.focus();
+      const newPhoneNumber = phoneNumInput.current.value;
+    
+      const person = persons.find(n => n.id === id);
+      const changedPhoneNum = { ...person, number: newPhoneNumber}
+      
+
+      personsService
+        .update(id, changedPhoneNum)
+        .then(returnedPerson => 
+          setPersons(persons.map(person => 
+            person.id !== id 
+            ? person 
+            : returnedPerson
+          ))
+        )
+    }
+    nameInput.current.value = '';
+    phoneNumInput.current.value = '';
+    nameInput.current.focus();
+  }
+
+
   const handleSearch = (searchInput) => {
-    let foundPersons = [];
+    // let foundPersons = [];
 
     const addSearchResult = (result) => {
-      foundPersons = result();
+      const foundPersons = result();
       setSearchResult(foundPersons);      
     }
 
     const findPersons = () => {
-      searchInput = searchInput.toUpperCase();
+        searchInput = searchInput.toUpperCase();
       
-      return persons.filter((person) => person.name.toUpperCase().includes(searchInput));
+        return persons.filter(person => person.name.toUpperCase().includes(searchInput));
+      }
+
+      
+    
+
+    const noPersonsFound = () => {
+      return console.log('No person found');
     }
 
-    const noPersonsFound = () => 'No person found';
-
-    findPersons 
+    findPersons
       ? addSearchResult(findPersons)
       : noPersonsFound(); 
+  }
+
+
+  const handleRemoval = (id) => {
+    const personToRemove = persons.find(n => 
+      (n.id === id)
+    )
+    
+    const confirmRemoval = window.confirm(`Delete ${personToRemove.name}?`)
+
+    if (confirmRemoval) {
+      const foundPersons = persons.filter(n => n.id !== id);
+      console.log(foundPersons);
+
+      personsService
+        .remove(id)
+        // TODO: Is it better to promise chain the setState or have them separate?
+        .then(setPersons(foundPersons))
+        .then(setSearchResult(searchResult.filter(n => n.id !== id)))
+    }
   }
 
 
@@ -83,9 +137,9 @@ const App = () => {
       
       <h2>Phonebook</h2>
       <h3>Name Search</h3>
-      <Filter handleSearch={handleSearch} />
+      <Filter handleSearch={handleSearch} searchResult={searchResult} />
       <h3>Results</h3>
-      <Person searchResult={searchResult}/>
+      <Person searchResult={searchResult} handleRemoval={handleRemoval} />
       <h3>Add Person to Phonebook</h3>
       <PersonForm handleAddPerson={handleAddPerson}/>
 

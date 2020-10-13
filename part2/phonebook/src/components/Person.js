@@ -1,15 +1,21 @@
 import React from 'react';
 
-const Person = ({ searchResult }) => {
+const Person = ({ searchResult, handleRemoval }) => {
   return (
     <>
       <table>
         <tbody>
-          {searchResult.map(val =>
+          {searchResult === undefined ? <tr><td>Nothing</td></tr> :
+          searchResult.map(val =>
             <tr key={val.id}>
               <td> {val.name} </td>
               <td>{'.'.repeat(10)}</td>
               <td>{val.number}</td>
+              <td>
+                <button onClick={() => handleRemoval(val.id)}>
+                  delete
+                </button>
+              </td>
             </tr> 
             )}
         </tbody>
