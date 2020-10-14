@@ -16,7 +16,7 @@ const convertToCamelCase = (string) => {
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [message, setMessage] = useState(null);
   
 
   useEffect(() => {
@@ -24,7 +24,12 @@ const App = () => {
     personsService
       .getAll()
       .then(initialPersons => setPersons(initialPersons))
-      .catch(error => setErrorMessage(`${error}: Failed to retrieve persons.`))
+      .catch(error => {
+        setMessage(`${error}: Failed to retrieve persons.`)
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
+      })
       
   }, []);
 
@@ -76,6 +81,11 @@ const App = () => {
             : returnedPerson
           ))
         )
+
+      setMessage(`${name}'s phone number has been changed`)
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
     }
     nameInput.current.value = '';
     phoneNumInput.current.value = '';
@@ -124,6 +134,11 @@ const App = () => {
         // TODO: Is it better to promise chain the setState or have them separate?
         .then(setPersons(foundPersons))
         .then(setSearchResult(searchResult.filter(n => n.id !== id)))
+      
+      setMessage(`${personToRemove.name} has been deleted`)
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
     }
   }
 
@@ -133,7 +148,7 @@ const App = () => {
       
       <h2>Phonebook</h2>
 
-      <Notification message={errorMessage} />
+      <Notification message={message} />
 
       <h3>Name Search</h3>
       <Filter handleSearch={handleSearch} searchResult={searchResult} />

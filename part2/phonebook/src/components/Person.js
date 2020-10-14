@@ -5,7 +5,7 @@ const Person = ({ searchResult, handleRemoval }) => {
     <>
       <table>
         <tbody>
-          {searchResult === undefined || []
+          {searchResult === undefined 
             ? <tr><td>None: Search for a name to display results</td></tr> 
             : searchResult.map(val =>
               <tr key={val.id}>
