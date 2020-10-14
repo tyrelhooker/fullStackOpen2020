@@ -4,6 +4,7 @@ import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Person from './components/Person';
 import personsService from './services/persons';
+import Notification from './components/Notification';
 
 const convertToCamelCase = (string) => {
   return string.split(' ')
@@ -15,6 +16,7 @@ const convertToCamelCase = (string) => {
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(null);
   
 
   useEffect(() => {
@@ -22,7 +24,7 @@ const App = () => {
     personsService
       .getAll()
       .then(initialPersons => setPersons(initialPersons))
-      .catch(error => console.log(`${error}: Failed to retrieve persons.`))
+      .catch(error => setErrorMessage(`${error}: Failed to retrieve persons.`))
       
   }, []);
 
@@ -51,6 +53,7 @@ const App = () => {
       : addPerson();
   }
 
+
   // TODO: fix the flow of this function. Maybe refactor the PersonForm Component?
   const handleUpdate = ( foundPerson, phoneNumInput, nameInput ) => {
     const {id, name} = foundPerson;
@@ -63,7 +66,6 @@ const App = () => {
     
       const person = persons.find(n => n.id === id);
       const changedPhoneNum = { ...person, number: newPhoneNumber}
-      
 
       personsService
         .update(id, changedPhoneNum)
@@ -96,8 +98,6 @@ const App = () => {
       }
 
       
-    
-
     const noPersonsFound = () => {
       return console.log('No person found');
     }
@@ -128,24 +128,23 @@ const App = () => {
   }
 
 
-  
-
-
   return (
     <div className="App">
-      {/* <div>{newName.map(value => value.name)}</div> */}
       
       <h2>Phonebook</h2>
+
+      <Notification message={errorMessage} />
+
       <h3>Name Search</h3>
       <Filter handleSearch={handleSearch} searchResult={searchResult} />
-      <h3>Results</h3>
-      <Person searchResult={searchResult} handleRemoval={handleRemoval} />
+
       <h3>Add Person to Phonebook</h3>
       <PersonForm handleAddPerson={handleAddPerson}/>
 
+      <h3>Results</h3>
+      <Person searchResult={searchResult} handleRemoval={handleRemoval} />
       
-      
-    </div>
+      </div>
   );
 }
 
