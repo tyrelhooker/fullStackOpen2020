@@ -13,6 +13,15 @@ const convertToCamelCase = (string) => {
     .join(' ');
 }
 
+const clearInputValues = (nameInput, numberInput) => {
+  console.log('nameInput', nameInput);
+  nameInput.current.value = '';
+  numberInput.current.value='';
+  nameInput.current.focus();
+  
+  
+}
+
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
@@ -31,7 +40,7 @@ const App = () => {
         }, 5000)
       })
       
-  }, []);
+  }, [searchResult]);
 
 
   const handleAddPerson = (nameInput, phoneNumInput, entirePhoneNumInput, entireNameInput) => {
@@ -49,6 +58,17 @@ const App = () => {
         .then(returnedPersons => {
           setPersons(persons.concat(returnedPersons))
         })
+      
+      
+
+      
+      clearInputValues(entireNameInput, entirePhoneNumInput)
+      setMessage(`${newPersons.name} was added to phonebook`)
+      setTimeout(() => {
+        
+        setMessage(null)
+      }, 5000)
+      
     }
 
     let foundPerson = persons.find(person => person.name.toLowerCase() === nameInput.toLowerCase());
@@ -56,6 +76,8 @@ const App = () => {
     foundPerson 
       ? handleUpdate(foundPerson, entirePhoneNumInput, entireNameInput)
       : addPerson();
+    
+      
   }
 
 
@@ -81,15 +103,14 @@ const App = () => {
             : returnedPerson
           ))
         )
+        .catch(error => setMessage(`${error}:  ${name}'s has previously been deleted`))
 
       setMessage(`${name}'s phone number has been changed`)
       setTimeout(() => {
         setMessage(null)
       }, 5000)
     }
-    nameInput.current.value = '';
-    phoneNumInput.current.value = '';
-    nameInput.current.focus();
+    clearInputValues(nameInput, phoneNumInput)
   }
 
 
@@ -148,14 +169,14 @@ const App = () => {
       
       <h2>Phonebook</h2>
 
-      <Notification message={message} />
+      
 
       <h3>Name Search</h3>
       <Filter handleSearch={handleSearch} searchResult={searchResult} />
 
       <h3>Add Person to Phonebook</h3>
       <PersonForm handleAddPerson={handleAddPerson}/>
-
+      <Notification message={message} />
       <h3>Results</h3>
       <Person searchResult={searchResult} handleRemoval={handleRemoval} />
       
