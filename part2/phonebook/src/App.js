@@ -22,6 +22,7 @@ const clearInputValues = (nameInput, numberInput) => {
   
 }
 
+// TODO: Change the messages so that successful messages have green border and error messages have red borders. 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
