@@ -3,8 +3,11 @@
 *********************************************** */
 const { response } = require('express');
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors());
 
 // Express json parser allows access to post req.body data. It parses incoming requests with JSON payloads and is based on body-parser. 
 app.use(express.json());
